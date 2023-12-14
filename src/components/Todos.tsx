@@ -2,6 +2,7 @@ import { getTodos } from "../apis/jsonserver";
 import { useQuery } from "@tanstack/react-query";
 import TodoCard from "./TodoCard";
 import styled from "styled-components";
+import NoTodo from "./ui/NoTodo";
 
 const Todos = () => {
   const { data, error } = useQuery({
@@ -31,7 +32,9 @@ const Todos = () => {
   return (
     <>
       {totalCount === 0 ? (
-        <p>표시할 내용이 없어요. 할일을 추가해 볼까요?</p>
+        <StWrapperDiv>
+          <NoTodo />
+        </StWrapperDiv>
       ) : (
         <>
           <StCategoryName>진행도😼</StCategoryName>
@@ -58,6 +61,7 @@ const StTodoWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  margin: auto;
   margin-bottom: 40px;
 `;
 
@@ -76,6 +80,13 @@ const StProgressBar = styled.progress`
     background-color: #0d60bf;
     border-radius: 10px;
   }
+`;
+
+const StWrapperDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StCategoryName = styled.h2`

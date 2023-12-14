@@ -85,7 +85,7 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
 //styled-components
 const StTodoCardDiv = styled.div<StCompProps>`
   position: relative;
-  width: 350px;
+  width: 380px;
   height: 300px;
   border-radius: 15px;
   padding: 1rem;
@@ -102,7 +102,7 @@ const StTitleH2 = styled.h2`
 
 const StContentDiv = styled.div`
   height: 180px;
-  width: 320px;
+  width: 350px;
   overflow-x: auto;
   p {
     line-height: 1.5rem;
