@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef } from "react";
+import { FormEvent, useRef } from "react";
 import Todo from "../models/todo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addTodo } from "../apis/jsonserver";

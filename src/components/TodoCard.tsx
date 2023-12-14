@@ -35,7 +35,6 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
     Swal.fire({
       title: "삭제할까요?",
       text: "삭제된 내용은 복구할 수 없습니다",
-      //   icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#c26994",
       cancelButtonColor: "#8db8e4",
@@ -46,7 +45,6 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
         Swal.fire({
           title: "삭제완료",
           text: "성공적으로 삭제하였습니다",
-          //   icon: "success",
           confirmButtonColor: "#8db8e4",
         });
         deleteMutate.mutate(id);
