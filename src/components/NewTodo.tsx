@@ -19,7 +19,7 @@ const NewTodo = () => {
 
       Swal.fire({
         title: "Todo 추가 완료 😻",
-        icon: "success",
+        // icon: "success",
       });
       //input 초기화
       if (titleRef.current && contentRef.current) {

@@ -30,25 +30,26 @@ const Todos = () => {
 
   return (
     <>
-      {!!totalCount && (
+      {totalCount === 0 ? (
+        <p>표시할 내용이 없어요. 할일을 추가해 볼까요?</p>
+      ) : (
         <>
           <StCategoryName>진행도😼</StCategoryName>
           <StProgressBar value={progressRatio} />
+          <StTodoWrapper>
+            <StCategoryName>진행중인 ToDo!🤔</StCategoryName>
+            {undoneItems.map((todo) => {
+              return <TodoCard item={todo} isDone={todo.isDone} />;
+            })}
+          </StTodoWrapper>
+          <StTodoWrapper>
+            <StCategoryName>완료된 ToDo!🥳</StCategoryName>
+            {doneItems.map((todo) => {
+              return <TodoCard item={todo} isDone={todo.isDone} />;
+            })}
+          </StTodoWrapper>
         </>
       )}
-
-      <StTodoWrapper>
-        <StCategoryName>진행중인 ToDo!🤔</StCategoryName>
-        {undoneItems.map((todo) => {
-          return <TodoCard item={todo} isDone={todo.isDone} />;
-        })}
-      </StTodoWrapper>
-      <StTodoWrapper>
-        <StCategoryName>완료된 ToDo!🥳</StCategoryName>
-        {doneItems.map((todo) => {
-          return <TodoCard item={todo} isDone={todo.isDone} />;
-        })}
-      </StTodoWrapper>
     </>
   );
 };
