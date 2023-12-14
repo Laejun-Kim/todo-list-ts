@@ -1,6 +1,7 @@
-import React from "react";
 import { getTodos } from "../apis/jsonserver";
 import { useQuery } from "@tanstack/react-query";
+import TodoCard from "./TodoCard";
+import styled from "styled-components";
 
 const Todos = () => {
   const { data, error } = useQuery({
@@ -17,13 +18,68 @@ const Todos = () => {
   if (!data) {
     return <p>데이터 로딩중...</p>;
   }
+
+  const doneItems = data.filter((todo) => todo.isDone);
+
+  const undoneItems = data.filter((todo) => !todo.isDone);
+
+  const doneCount = doneItems.length;
+  const undoneCount = undoneItems.length;
+  const totalCount = doneCount + undoneCount;
+  const progressRatio = (doneCount / totalCount).toFixed(2);
+
   return (
-    <ul>
-      {data.map((el) => {
-        return <li key={el.id}>{el.title}</li>;
-      })}
-    </ul>
+    <>
+      {!!totalCount && (
+        <>
+          <StCategoryName>진행도😼</StCategoryName>
+          <StProgressBar value={progressRatio} />
+        </>
+      )}
+
+      <StTodoWrapper>
+        <StCategoryName>진행중인 ToDo!🤔</StCategoryName>
+        {undoneItems.map((todo) => {
+          return <TodoCard item={todo} isDone={todo.isDone} />;
+        })}
+      </StTodoWrapper>
+      <StTodoWrapper>
+        <StCategoryName>완료된 ToDo!🥳</StCategoryName>
+        {doneItems.map((todo) => {
+          return <TodoCard item={todo} isDone={todo.isDone} />;
+        })}
+      </StTodoWrapper>
+    </>
   );
 };
+
+const StTodoWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 40px;
+`;
+
+const StProgressBar = styled.progress`
+  width: 100%;
+  height: 30px;
+  margin-bottom: 20px;
+  padding: 5px;
+  appearance: none;
+  &::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 10px;
+  }
+
+  &::-webkit-progress-value {
+    background-color: #0d60bf;
+    border-radius: 10px;
+  }
+`;
+
+const StCategoryName = styled.h2`
+  width: 100%;
+  font-size: x-large;
+`;
 
 export default Todos;

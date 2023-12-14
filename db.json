@@ -1,87 +1,9 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "장보기",
-      "content": "고기100g, 우유1팩, 당근 2개",
-      "isDone": true
-    },
-    {
-      "id": 2,
-      "title": "고양이",
-      "content": "사료 챙겨주기, 털 빗질",
-      "isDone": false
-    },
-    {
-      "id": 3,
-      "title": "리액트 공부",
-      "content": "과제 시도해보기",
-      "isDone": false
-    },
-    {
-      "id": "AaD-QtYISfOp2DEoysvzP",
-      "title": "추가 되나 볼까? ",
-      "content": "추가 되어야 할텐데...",
-      "isDone": false
-    },
-    {
-      "id": "CjIF0nrXrEOADEUOetgfg",
-      "title": "",
-      "content": "",
-      "isDone": false
-    },
-    {
-      "id": "ln0GJUN-pvk2Tke6EJbHr",
-      "title": "히히",
-      "content": "잘 된다",
-      "isDone": false
-    },
-    {
-      "id": "sLbc88V6oBcx4k6c_TfgI",
-      "title": "재밌다 재밌어",
-      "content": "신기하네 ㄹㅇ루다가",
-      "isDone": false
-    },
-    {
-      "id": "9xCKzixQAz-Mx7jIGYUvl",
-      "title": "자동 새로고침?!",
-      "content": "히히",
-      "isDone": false
-    },
-    {
-      "id": "D9hkqqKKOXDe2JK24AcI7",
-      "title": "공용 버튼",
-      "content": "??",
-      "isDone": false
-    },
-    {
-      "id": "TBkskcDWt-uAcUT3siXH8",
-      "title": "공용 버튼",
-      "content": "??",
-      "isDone": false
-    },
-    {
-      "id": "_GBji1tE7gGYPxDkEqArr",
-      "title": "공용 버튼",
-      "content": "??",
-      "isDone": false
-    },
-    {
-      "id": "_H5qh6YVmMv-ENO8zdBye",
-      "title": "공용 버튼",
-      "content": "??",
-      "isDone": false
-    },
-    {
-      "id": "taISfXN7-K4MZepVvp3zR",
-      "title": "공용 버튼",
-      "content": "??",
-      "isDone": false
-    },
-    {
-      "id": "T90ZPHOp-5fulCU6bO5RE",
-      "title": "공용 버튼",
-      "content": "??",
+      "id": "IYmr9PIOZfcVkiT5wyCup",
+      "title": "ㅁㄴㅇㄹ",
+      "content": "ㅊㅍㅌ",
       "isDone": false
     }
   ]

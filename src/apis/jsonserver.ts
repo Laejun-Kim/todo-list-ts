@@ -17,6 +17,17 @@ export const addTodo = async (newTodo: Todo) => {
   await axios.post(`${process.env.REACT_APP_SERVER_URL}/todos`, newTodo);
 };
 
-const toggleTodo = (id: string) => {};
+interface ToggleTodoParams {
+  id: string | number;
+  isDone: boolean;
+}
 
-const deleteTodo = (id: string) => {};
+export const toggleTodo = ({ id, isDone }: ToggleTodoParams) => {
+  return axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, {
+    isDone: !isDone,
+  });
+};
+
+export const deleteTodo = (id: string | number) => {
+  return axios.delete(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
+};

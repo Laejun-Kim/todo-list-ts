@@ -56,6 +56,9 @@ const GlobalStyle = createGlobalStyle`
             sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        max-width: 1200px;
+        min-width: 800px;
+        margin:auto;
 }
 `;
 
