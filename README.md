@@ -1,4 +1,4 @@
-# [내일배움캠프][개인 프로젝트] - K/DA Fanletter Web+Redux Toolkit
+# [내일배움캠프][개인 프로젝트] - ToDo List using TypeScript
 
 ![logo](https://velog.velcdn.com/images/laejunkim/post/49c85905-07db-4735-8302-8c9a3c398a42/image.png)
 
