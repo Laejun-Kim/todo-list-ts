@@ -5,7 +5,7 @@ import styled from "styled-components";
 import NoTodo from "./ui/NoTodo";
 
 const Todos = () => {
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["todos"],
     queryFn: getTodos,
   });
@@ -16,13 +16,13 @@ const Todos = () => {
     return <p>에러발생!! 계속 이러면 개발자에게 문의하세요</p>;
   }
 
-  if (!data) {
+  if (isLoading && !data) {
     return <p>데이터 로딩중...</p>;
   }
 
-  const doneItems = data.filter((todo) => todo.isDone);
+  const doneItems = data!.filter((todo) => todo.isDone);
 
-  const undoneItems = data.filter((todo) => !todo.isDone);
+  const undoneItems = data!.filter((todo) => !todo.isDone);
 
   const doneCount = doneItems.length;
   const undoneCount = undoneItems.length;
