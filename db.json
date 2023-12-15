@@ -10,7 +10,7 @@
       "id": "E8PyU1jZy7MmwQ-_ypgjz",
       "title": "1",
       "content": "1",
-      "isDone": false
+      "isDone": true
     },
     {
       "id": "bCIvQXUYdHAwvsFfflnrk",
@@ -40,7 +40,7 @@
       "id": "Ylf9Tph70CfurTdFe6U5u",
       "title": "asdf",
       "content": "1234",
-      "isDone": true
+      "isDone": false
     }
   ]
 }
