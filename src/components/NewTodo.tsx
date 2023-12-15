@@ -5,10 +5,14 @@ import { addTodo } from "../apis/jsonserver";
 import BaseButton from "./ui/BaseButton";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { addTodos } from "../redux/modules/todosSlice";
 
 const NewTodo = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useAppDispatch();
 
   const queryClient = useQueryClient();
 
@@ -40,8 +44,14 @@ const NewTodo = () => {
 
       return;
     }
+    const newTodo = new Todo(
+      titleRef.current!.value,
+      contentRef.current!.value
+    );
+    dispatch(addTodos({ ...newTodo }));
     addMutate.mutate(
-      new Todo(titleRef.current!.value, contentRef.current!.value)
+      // new Todo(titleRef.current!.value, contentRef.current!.value)
+      newTodo
     );
   };
 

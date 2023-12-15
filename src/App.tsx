@@ -1,16 +1,17 @@
 import Header from "./components/ui/Header";
 import NewTodo from "./components/NewTodo";
 import Todos from "./components/Todos";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { Provider } from "react-redux";
+// import store from "./redux/config/configStore";
 
 function App() {
-  const queryClient = new QueryClient();
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Header />
       <NewTodo />
       <Todos />
-    </QueryClientProvider>
+    </>
   );
 }
 

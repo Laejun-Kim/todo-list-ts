@@ -5,44 +5,37 @@ import styled from "styled-components";
 import NoTodo from "./ui/NoTodo";
 import { useAppSelector, useAppDispatch } from "../hooks/reduxHooks";
 import { setTodos } from "../redux/modules/todosSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+// import Todo from "../models/todo";
 
 const Todos = () => {
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["todos"],
     queryFn: getTodos,
   });
-  console.log("쿼리에서 찍힌거", data, error);
-  const dispatch = useAppDispatch();
+  console.log("쿼리에서 찍힌거", data);
+  // const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const todos = useAppSelector((state) => state.todos);
 
-  if (data) {
-    dispatch(setTodos(data));
-    console.log("리덕스todos", todos);
-  }
-  if (error) {
-    return <p>에러발생!! 계속 이러면 개발자에게 문의하세요</p>;
-  }
+  // if (error) {
+  //   return <p>에러발생!! 계속 이러면 개발자에게 문의하세요</p>;
+  // }
 
-  if (isLoading && !data) {
+  if (isLoading) {
     return <p>데이터 로딩중...</p>;
   }
 
-  // if (data) {
-  //   dispatch(setTodos(data));
-  //   console.log("데이터가 있긴 한거야?", data);
-  //   console.log("리덕스 todo", todos);
-  // }
+  if (data) {
+    console.log(data);
+    dispatch(setTodos(data));
+    console.log("리덕스 todos", todos);
+  }
 
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(setTodos(data));
-  //     console.log(todos);
-  //   }
-  // }, [data]);
+  const doneItems = todos.filter((todo) => todo.isDone);
 
-  const doneItems = data!.filter((todo) => todo.isDone);
-
-  const undoneItems = data!.filter((todo) => !todo.isDone);
+  const undoneItems = todos.filter((todo) => !todo.isDone);
 
   const doneCount = doneItems.length;
   const undoneCount = undoneItems.length;
@@ -61,19 +54,23 @@ const Todos = () => {
           <StProgressBar value={progressRatio} />
           <StTodoWrapper>
             <StCategoryName>진행중인 ToDo!🤔</StCategoryName>
-            {undoneItems.map((todo) => {
-              return (
-                <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
-              );
-            })}
+            {todos
+              .filter((todo) => !todo.isDone)
+              .map((todo) => {
+                return (
+                  <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
+                );
+              })}
           </StTodoWrapper>
           <StTodoWrapper>
             <StCategoryName>완료된 ToDo!🥳</StCategoryName>
-            {doneItems.map((todo) => {
-              return (
-                <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
-              );
-            })}
+            {todos
+              .filter((todo) => todo.isDone)
+              .map((todo) => {
+                return (
+                  <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
+                );
+              })}
           </StTodoWrapper>
         </>
       )}
