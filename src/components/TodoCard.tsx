@@ -26,7 +26,20 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
 
   const toggleMutate = useMutation({
     mutationFn: toggleTodo,
-    onSuccess: () => {
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ["todos"] });
+    // },
+    onMutate: async (newTodo) => {
+      await queryClient.cancelQueries({ queryKey: ["todos"] });
+      const prevTodos = queryClient.getQueryData(["todos"]);
+      queryClient.setQueryData(["todos"], (old: Todo[]) => [...old, newTodo]);
+      return { prevTodos };
+    },
+    onError: (err, newTodo, context) => {
+      if (err) throw new Error("optimistic update중 에러가 발생했습니다", err);
+      queryClient.setQueryData(["todos"], context?.prevTodos);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
