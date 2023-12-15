@@ -33,6 +33,7 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
 
   const deleteBtnHndlr = (id: string | number) => {
     Swal.fire({
+      icon: "warning",
       title: "삭제할까요?",
       text: "삭제된 내용은 복구할 수 없습니다",
       showCancelButton: true,

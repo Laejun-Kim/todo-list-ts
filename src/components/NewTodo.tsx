@@ -19,7 +19,7 @@ const NewTodo = () => {
 
       Swal.fire({
         title: "Todo 추가 완료 😻",
-        // icon: "success",
+        icon: "success",
       });
       //input 초기화
       if (titleRef.current && contentRef.current) {
@@ -31,6 +31,15 @@ const NewTodo = () => {
 
   const submitHndlr = (e: FormEvent) => {
     e.preventDefault();
+    if (titleRef.current!.value && titleRef.current!.value.trim() === "") {
+      Swal.fire({
+        icon: "error",
+        text: "제목에 공백만 입력하는건 곤란해요...",
+        confirmButtonColor: "#0d60bf",
+      });
+
+      return;
+    }
     addMutate.mutate(
       new Todo(titleRef.current!.value, contentRef.current!.value)
     );
