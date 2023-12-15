@@ -3,15 +3,22 @@ import { useQuery } from "@tanstack/react-query";
 import TodoCard from "./TodoCard";
 import styled from "styled-components";
 import NoTodo from "./ui/NoTodo";
+import { useAppSelector, useAppDispatch } from "../hooks/reduxHooks";
+import { setTodos } from "../redux/modules/todosSlice";
 
 const Todos = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["todos"],
     queryFn: getTodos,
   });
-
   console.log("쿼리에서 찍힌거", data, error);
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector((state) => state.todos);
 
+  if (data) {
+    dispatch(setTodos(data));
+    console.log("리덕스todos", todos);
+  }
   if (error) {
     return <p>에러발생!! 계속 이러면 개발자에게 문의하세요</p>;
   }
@@ -19,6 +26,19 @@ const Todos = () => {
   if (isLoading && !data) {
     return <p>데이터 로딩중...</p>;
   }
+
+  // if (data) {
+  //   dispatch(setTodos(data));
+  //   console.log("데이터가 있긴 한거야?", data);
+  //   console.log("리덕스 todo", todos);
+  // }
+
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(setTodos(data));
+  //     console.log(todos);
+  //   }
+  // }, [data]);
 
   const doneItems = data!.filter((todo) => todo.isDone);
 
@@ -42,13 +62,17 @@ const Todos = () => {
           <StTodoWrapper>
             <StCategoryName>진행중인 ToDo!🤔</StCategoryName>
             {undoneItems.map((todo) => {
-              return <TodoCard item={todo} isDone={todo.isDone} />;
+              return (
+                <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
+              );
             })}
           </StTodoWrapper>
           <StTodoWrapper>
             <StCategoryName>완료된 ToDo!🥳</StCategoryName>
             {doneItems.map((todo) => {
-              return <TodoCard item={todo} isDone={todo.isDone} />;
+              return (
+                <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
+              );
             })}
           </StTodoWrapper>
         </>
