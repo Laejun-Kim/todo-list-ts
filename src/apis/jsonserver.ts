@@ -15,10 +15,15 @@ interface ToggleTodoParams {
   isDone: boolean;
 }
 
-export const toggleTodo = ({ id, isDone }: ToggleTodoParams) => {
-  return axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, {
-    isDone: !isDone,
-  });
+export const toggleTodo = async ({ id, isDone }: ToggleTodoParams) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_SERVER_URL}/todos/${id}`,
+    {
+      isDone: !isDone,
+    }
+  );
+  console.log(response);
+  return response;
 };
 
 export const deleteTodo = (id: string | number) => {
