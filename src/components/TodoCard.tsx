@@ -30,9 +30,22 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
     //   queryClient.invalidateQueries({ queryKey: ["todos"] });
     // },
     onMutate: async (newTodo) => {
+      console.log("뉴투두가 뭔데", newTodo); //id랑 이즈던이 들어간 객체인데??
       await queryClient.cancelQueries({ queryKey: ["todos"] });
       const prevTodos = queryClient.getQueryData(["todos"]);
-      queryClient.setQueryData(["todos"], (old: Todo[]) => [...old, newTodo]);
+      console.log("겟쿼리 데이터로 뭘 받아오는거지?", prevTodos);
+      // queryClient.setQueryData(["todos"], (old: Todo[]) => [...old, newTodo]);
+      queryClient.setQueryData(["todos"], (oldTodos: Todo[]) => {
+        // if (!oldTodos) {
+        //   return [];
+        // }
+
+        const updatedTodos = oldTodos.map((todo) =>
+          todo.id === newTodo.id ? { ...todo, isDone: !newTodo.isDone } : todo
+        );
+
+        return updatedTodos;
+      });
       return { prevTodos };
     },
     onError: (err, newTodo, context) => {
