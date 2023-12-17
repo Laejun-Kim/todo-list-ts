@@ -32,6 +32,7 @@ TypeScript의 도입 뿐만 지금까지 배운 tanstack query, axios, json-serv
 - sweetalert2
 - nanoid
 - styled-components
+- json-server
 
 ## 주요 기능
 
