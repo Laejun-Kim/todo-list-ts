@@ -22,7 +22,6 @@ export const toggleTodo = async ({ id, isDone }: ToggleTodoParams) => {
       isDone: !isDone,
     }
   );
-  console.log(response);
   return response;
 };
 

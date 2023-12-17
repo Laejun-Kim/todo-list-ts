@@ -31,6 +31,8 @@ const NewTodo = () => {
 
   const submitHndlr = (e: FormEvent) => {
     e.preventDefault();
+
+    //input validation
     if (titleRef.current!.value && titleRef.current!.value.trim() === "") {
       Swal.fire({
         icon: "error",
