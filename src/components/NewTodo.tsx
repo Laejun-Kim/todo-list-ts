@@ -49,7 +49,7 @@ const NewTodo = () => {
 
   return (
     <StInputForm onSubmit={submitHndlr}>
-      <label htmlFor="title">제목 </label>
+      <label htmlFor="title">제목 :</label>
       <input
         required
         type="text"
@@ -58,7 +58,7 @@ const NewTodo = () => {
         maxLength={15}
         placeholder="제목을 입력하세요(15자 이내)"
       />
-      <label htmlFor="content">내용 </label>
+      <label htmlFor="content">내용 :</label>
       <input
         required
         type="text"
