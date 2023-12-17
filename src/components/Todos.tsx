@@ -10,8 +10,6 @@ const Todos = () => {
     queryFn: getTodos,
   });
 
-  console.log("쿼리에서 찍힌거", data, error);
-
   if (error) {
     return <p>에러발생!! 계속 이러면 개발자에게 문의하세요</p>;
   }
@@ -21,7 +19,6 @@ const Todos = () => {
   }
 
   const doneItems = data!.filter((todo) => todo.isDone);
-
   const undoneItems = data!.filter((todo) => !todo.isDone);
 
   const doneCount = doneItems.length;
@@ -42,13 +39,17 @@ const Todos = () => {
           <StTodoWrapper>
             <StCategoryName>진행중인 ToDo!🤔</StCategoryName>
             {undoneItems.map((todo) => {
-              return <TodoCard item={todo} isDone={todo.isDone} />;
+              return (
+                <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
+              );
             })}
           </StTodoWrapper>
           <StTodoWrapper>
             <StCategoryName>완료된 ToDo!🥳</StCategoryName>
             {doneItems.map((todo) => {
-              return <TodoCard item={todo} isDone={todo.isDone} />;
+              return (
+                <TodoCard key={todo.id} item={todo} isDone={todo.isDone} />
+              );
             })}
           </StTodoWrapper>
         </>

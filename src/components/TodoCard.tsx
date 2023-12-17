@@ -10,6 +10,7 @@ interface TodoCardProps {
   item: Todo;
   isDone: boolean;
 }
+//styled-components에서 사용할 커스텀 props type 정의
 interface StCompProps {
   readonly $shouldDisplay: boolean;
 }
@@ -17,6 +18,7 @@ interface StCompProps {
 const TodoCard = ({ item, isDone }: TodoCardProps) => {
   const queryClient = useQueryClient();
 
+  //삭제 기능
   const deleteMutate = useMutation({
     mutationFn: deleteTodo,
     onSuccess: () => {
@@ -24,31 +26,26 @@ const TodoCard = ({ item, isDone }: TodoCardProps) => {
     },
   });
 
+  //isDone 토글 기능
   const toggleMutate = useMutation({
     mutationFn: toggleTodo,
-    // onSuccess: () => {
-    //   queryClient.invalidateQueries({ queryKey: ["todos"] });
-    // },
-    onMutate: async (newTodo) => {
-      console.log("뉴투두가 뭔데", newTodo); //id랑 이즈던이 들어간 객체인데??
+
+    //Optimistic Update
+    onMutate: async (toggleTodoParams) => {
       await queryClient.cancelQueries({ queryKey: ["todos"] });
       const prevTodos = queryClient.getQueryData(["todos"]);
-      console.log("겟쿼리 데이터로 뭘 받아오는거지?", prevTodos);
-      // queryClient.setQueryData(["todos"], (old: Todo[]) => [...old, newTodo]);
       queryClient.setQueryData(["todos"], (oldTodos: Todo[]) => {
-        // if (!oldTodos) {
-        //   return [];
-        // }
-
         const updatedTodos = oldTodos.map((todo) =>
-          todo.id === newTodo.id ? { ...todo, isDone: !newTodo.isDone } : todo
+          todo.id === toggleTodoParams.id
+            ? { ...todo, isDone: !toggleTodoParams.isDone }
+            : todo
         );
 
         return updatedTodos;
       });
       return { prevTodos };
     },
-    onError: (err, newTodo, context) => {
+    onError: (err, __, context) => {
       if (err) throw new Error("optimistic update중 에러가 발생했습니다", err);
       queryClient.setQueryData(["todos"], context?.prevTodos);
     },
@@ -159,7 +156,6 @@ const StBtnDiv = styled.div`
 `;
 
 const StStampImg = styled.img<StCompProps>`
-  //styled-components에 커스텀 prop을 주려면 이게 필수다
   display: ${(props) => (props.$shouldDisplay ? "block" : "none")};
   height: 130px;
   position: absolute;
